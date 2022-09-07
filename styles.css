@@ -49,6 +49,12 @@ body{
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+.container-comments{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .new-comment{
     display: flex;
     flex-direction: row;
@@ -169,4 +175,8 @@ button::before{
     border-radius: inherit;
     background-color: var(--neutralThree);
     cursor: pointer;
+}
+
+.display-button{
+    display: none;
 }
