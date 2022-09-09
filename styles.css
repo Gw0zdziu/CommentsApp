@@ -26,7 +26,9 @@
 }
 
 body {
+	display: flex;
 	background-color: var(--neutralThree);
+	justify-content: center;
 }
 
 .container {
@@ -34,72 +36,67 @@ body {
 	flex-direction: column;
 	align-items: center;
 	gap: 16px;
-	margin: 16px;
+	margin-top: 16px;
+	width: 50%;
 }
 
 .add-new-comment {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	display: grid;
+	grid-template-columns: 50px auto 80px;
+	grid-template-rows: 1fr;
 	gap: 12px;
-	width: 600px;
-	padding: 12px;
+	width: 100%;
+	padding: 20px;
 	border-radius: 8px;
 	background-color: var(--neutralFour);
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.container-comments {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
 }
 
 .new-comment {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	gap: 16px;
-	width: 600px;
-	padding: 12px;
+	display: grid;
+	grid-template-columns: auto 1fr 1fr;
+	grid-template-rows: 50% auto;
+	align-items: start;
+	padding: 24px;
 	border-radius: 8px;
-
 	background-color: var(--neutralFour);
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.vote-comment {
-	text-align: center;
-	border-radius: 8px;
-	background-color: var(--neutralThree);
-}
-
-.data-comment {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-}
-
-.info-buttons-comment {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	gap: 36px;
-	position: relative;
 }
 
 .info-comment {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
-	gap: 10px;
+	gap: 12px;
+}
+
+.vote-comment {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	align-self: start;
+	justify-self: center;
+	gap: 8px;
+	width: 40px;
+	margin-right: 16px;
+	padding: 4px;
+	border-radius: 8px;
+	text-align: center;
+	font-weight: var(--font-bold);
+	background-color: var(--neutralThree);
+	color: var(--primaryOne);
 }
 
 .buttons-comment {
-	position: absolute;
-	top: 0;
-	left: 448px;
+	display: flex;
+	gap: 16px;
+}
+
+.sentence-comment {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 2;
+	grid-row-end: 3;
 }
 
 .image {
@@ -107,18 +104,13 @@ body {
 	height: 48px;
 }
 
-.user-name {
-	font-weight: var(--font-bold);
-}
-
 .textarea {
-	width: 380px;
 	height: 90px;
 	padding: 8px 0 0 16px;
-	border: none;
+	border: 1px solid rgb(225, 225, 225);
 	outline-style: none;
 	resize: none;
-	border-radius: 4px;
+	border-radius: 8px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 	font-size: 16px;
 }
@@ -128,58 +120,78 @@ body {
 	width: 80px;
 	height: 40px;
 	border-radius: 6px;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 600;
 	cursor: pointer;
 }
-
 .button--send {
 	background-color: var(--primaryOne);
 	color: var(--neutralFour);
 }
 
-.button--edit {
-	color: var(--primaryOne);
-}
-
-.button--delete {
-	color: var(--primaryTwo);
-}
-
-.button--reply {
-	color: var(--primaryOne);
-}
-
-.button--edit,
-.button--delete,
-.button--reply {
+.button--vote {
+	border: none;
+	border-radius: inherit;
 	background-color: transparent;
+	cursor: pointer;
 }
 
-button::before {
-	padding-right: 4px;
+.button-comment {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* background-color: transparent; */
+}
+
+.vote-plus::before {
+	content: url(/images/icon-plus.svg);
+}
+
+.vote-minus::before {
+	content: url(/images/icon-minus.svg);
 }
 
 .button--edit::before {
+	padding-right: 8px;
 	content: url(./images/icon-edit.svg);
 }
 
 .button--delete::before {
+	padding-right: 8px;
 	content: url(./images/icon-delete.svg);
 }
 
 .button--reply::before {
+	padding-right: 8px;
 	content: url(./images/icon-reply.svg);
 }
 
-.button--vote {
-	padding: 8px;
-	border: none;
-	border-radius: inherit;
-	background-color: var(--neutralThree);
-	cursor: pointer;
-}
+@media only screen and (max-width: 860px) {
+	.add-new-comment {
+		display: grid;
+		grid-template-columns: auto;
+		row-gap: 8px;
+		align-items: center;
+		width: 100%;
+	}
+	.button--send {
+		grid-column-start: 2;
+		grid-column-end: 3;
+		justify-self: self-end;
+	}
 
-.display-button {
-	display: none;
+	.image-current-user {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 2;
+		grid-row-end: 3;
+		width: 36px;
+		height: 36px;
+	}
+	.textarea {
+		grid-column-start: 1;
+		grid-column-end: 3;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
 }
