@@ -3,38 +3,61 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- displays site properly based on user's device -->
 		<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
 		<title>Frontend Mentor | Interactive comments section</title>
 		<link rel="stylesheet" href="./styles.css" />
 	</head>
 	<body>
 		<div class="container">
-			<!-- <template> -->
-			<div class="new-comment">
-				<div class="vote-comment">
-					<button class="button--vote vote-plus"></button>
-					<div class="score">5</div>
-					<button class="button--vote vote-minus"></button>
+			<div class="comments">
+				<template id="new-comment-template">
+				<div class="new-comment">
+					<div class="vote-comment">
+						<button class="button--vote vote-plus"></button>
+						<div class="score">5</div>
+						<button class="button--vote vote-minus"></button>
+					</div>
+					<div class="info-comment">
+						<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
+						<span class="user-name">User</span>
+						<span class="created-date">1 day ago</span>
+					</div>
+					<div class="buttons-comment">
+						<button class="button button-comment button--edit">Edit</button>
+						<button class="button button-comment button--delete">Delete</button>
+						<button class="button button-comment button--reply">Reply</button>
+					</div>
+					<p class="sentence-comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis beatae incidunt alias molestiae omnis quam culpa quasi nam tempore dolorem, enim dicta excepturi voluptatum assumenda. Ad pariatur nisi repellat quae.</p>
 				</div>
-				<div class="info-comment">
-					<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
-					<span class="user-name">User</span>
-					<span class="created-date">1 day ago</span>
-				</div>
-				<div class="buttons-comment">
-					<button class="button button-comment button--edit">Edit</button>
-					<button class="button button-comment button--delete">Delete</button>
-					<button class="button button-comment button--reply">Reply</button>
-				</div>
-				<span class="sentence-comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis beatae incidunt alias molestiae omnis quam culpa quasi nam tempore dolorem, enim dicta excepturi voluptatum assumenda. Ad pariatur nisi repellat quae.</span>
+				</template>
+				<div class="reply-comments-container">
+					<template id="new-comment-reply-template">
+					<div class="new-comment reply">
+						<div class="vote-comment">
+							<button class="button--vote vote-plus"></button>
+							<div class="score">5</div>
+							<button class="button--vote vote-minus"></button>
+						</div>
+						<div class="info-comment">
+							<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
+							<span class="user-name">User</span>
+							<span class="created-date">1 day ago</span>
+						</div>
+						<div class="buttons-comment">
+							<button class="button button-comment button--edit">Edit</button>
+							<button class="button button-comment button--delete">Delete</button>
+							<button class="button button-comment button--reply">Reply</button>
+						</div>
+						<p class="sentence-comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis beatae incidunt alias molestiae omnis quam culpa quasi nam tempore dolorem, enim dicta excepturi voluptatum assumenda. Ad pariatur nisi repellat quae.</p>
+					</div>
+				</div>			
+				</template>
 			</div>
-			<!-- </template> -->
-			<div class="add-new-comment">
-				<img class="image image-current-user" src="./images/avatars/image-juliusomo.png" alt="image-juliusomo.png" />
-				<textarea class="textarea" placeholder="Add a comment..."></textarea>
-				<button class="button button--send">Send</button>
-			</div>
+		</div>
+		<div class="add-new-comment">
+			<img class="image image-current-user" src="./images/avatars/image-juliusomo.png" alt="image-juliusomo.png" />
+			<textarea class="textarea" placeholder="Add a comment..."></textarea>
+			<button class="button button--send" onclick="addCommment()">Send</button>
 		</div>
 		<script src="./app.js"></script>
 	</body>
