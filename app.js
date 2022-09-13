@@ -77,3 +77,7 @@ const addCommment = () => {
 	getTemplateComment(commentTemplate, contextOwnComment, true)
 	container.appendChild(comment)
 }
+
+const deletComment = (e)=>{
+	console.log(e.parentNode.remove());
+}

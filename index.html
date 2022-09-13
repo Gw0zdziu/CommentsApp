@@ -11,24 +11,22 @@
 		<div class="container">
 			<div class="comments">
 				<template id="new-comment-template">
-				<div class="new-comment">
-					<div class="vote-comment">
-						<button class="button--vote vote-plus"></button>
-						<div class="score">5</div>
-						<button class="button--vote vote-minus"></button>
-					</div>
-					<div class="info-comment">
-						<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
-						<span class="user-name">User</span>
-						<span class="created-date">1 day ago</span>
-					</div>
-					<div class="buttons-comment">
+					<div class="new-comment">
+						<div class="vote-comment">
+							<button class="button--vote vote-plus"></button>
+							<div class="score">5</div>
+							<button class="button--vote vote-minus"></button>
+						</div>
+						<div class="info-comment">
+							<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
+							<span class="user-name">User</span>
+							<span class="created-date">1 day ago</span>
+						</div>
 						<button class="button button-comment button--edit">Edit</button>
-						<button class="button button-comment button--delete">Delete</button>
+						<button class="button button-comment button--delete" onclick="deletComment(this)">Delete</button>
 						<button class="button button-comment button--reply">Reply</button>
+						<p class="sentence-comment"></p>
 					</div>
-					<p class="sentence-comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis beatae incidunt alias molestiae omnis quam culpa quasi nam tempore dolorem, enim dicta excepturi voluptatum assumenda. Ad pariatur nisi repellat quae.</p>
-				</div>
 				</template>
 				<div class="reply-comments-container">
 					<template id="new-comment-reply-template">

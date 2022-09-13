@@ -57,8 +57,10 @@ body {
 
 .new-comment {
 	display: grid;
-	grid-template-rows: 50% auto;
+	grid-template-rows: auto;
+	grid-template-columns: 60px 1fr repeat(3, 80px);
 	align-items: start;
+	min-height: 162px;
 	padding: 16px;
 	border-radius: 8px;
 	background-color: var(--neutralFour);
@@ -86,10 +88,6 @@ body {
 .vote-comment {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	align-self: start;
-	justify-self: center;
 	gap: 8px;
 	width: 40px;
 	margin-right: 16px;
@@ -112,7 +110,7 @@ body {
 .sentence-comment {
 	display: grid;
 	grid-column-start: 2;
-	grid-column-end: 4;
+	grid-column-end: 6;
 	grid-row-start: 2;
 	grid-row-end: 3;
 	word-break: break-all;
@@ -159,14 +157,20 @@ body {
 }
 
 .button--edit{
+	grid-column-start: 3;
+	grid-column-end: 4;
 	color: var(--primaryOne);	
 }
 
 .button--delete{
+	grid-column-start: 4;
+	grid-column-end: 5;
 	color: var(--primaryTwo);
 }
 
 .button--reply{
+	grid-column-start: 5;
+	grid-column-end: 6;
 	color: var(--primaryOne);
 }
 
@@ -282,14 +286,6 @@ body {
 		padding-bottom: 8px;
 	}
 
-	.buttons-comment{
-		grid-column-start: 2;
-		grid-column-end: 3;
-		grid-row-start: 3;
-		grid-row-end: 4;
-		justify-self: end;
-		align-self: center;
-	}
 
 	.vote-minus{
 		padding-bottom: 6px;
