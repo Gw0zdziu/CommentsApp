@@ -12,7 +12,6 @@ onload = async () => {
 	let localData = localStorage.getItem('comments')
 	if (localData) {
 		let data = JSON.parse(localData)
-		console.log(data)
 		dataComments.comments = data.comments
 		dataComments.currentUser = data.currentUser
 		currentUser = dataComments.currentUser
@@ -58,13 +57,11 @@ const getTemplateComment = (template, data, viewButtons) => {
 
 const addCommment = () => {
 	let textAreaElement = document.querySelector('.textarea')
-	let contentTextArea = textAreaElement.value
-	let dataFromLocalStorage = localStorage.getItem('comments')
-	let parseLocalStorage = JSON.parse(dataFromLocalStorage)
-	const fromLocalStorage = parseLocalStorage
+	let contentTextArea = textAreaElement.value	
+	let idLastComment = dataComments.comments.at(-1).id
 	if (contentTextArea) {
 		let contextOwnComment = {
-			id: 1,
+			id: idLastComment+1,
 			content: contentTextArea,
 			createdAt: '1 month ago',
 			score: 0,
@@ -76,10 +73,8 @@ const addCommment = () => {
 				username: dataComments.currentUser.username,
 			},
 		}
-		let commentsFromLocalStorage = fromLocalStorage.comments
-		commentsFromLocalStorage.push(contextOwnComment)
-		console.log(commentsFromLocalStorage)
-		localStorage.setItem('comments', JSON.stringify(commentsFromLocalStorage))
+		dataComments.comments.push(contextOwnComment)
+		localStorage.setItem('comments', JSON.stringify(dataComments))
 		getTemplateComment(commentTemplate, contextOwnComment, true)
 		container.appendChild(comment)
 		textAreaElement.value = ''
@@ -90,9 +85,13 @@ const addCommment = () => {
 
 const deleteComment = (event) => {
 	modalContainer.classList.add('display-modal')
+	let elementToDelete = event.parentNode.parentNode
+	let idCommentToDelete = elementToDelete.getAttribute('id')
 	let deleteCommentButtton = modalContainer.querySelector('.modal-confirm-button')
 	deleteCommentButtton.addEventListener('click', () => {
-		event.parentNode.parentNode.remove()
+		elementToDelete.remove()
+		dataComments.comments.splice(idCommentToDelete-1)
+		localStorage.setItem('comments', JSON.stringify(dataComments))
 		modalContainer.classList.remove('display-modal')
 	})
 }

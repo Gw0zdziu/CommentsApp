@@ -257,6 +257,16 @@ body {
 	background-color: transparent;
 }
 
+
+.button--vote>svg{
+fill: #C5C6EF;
+}
+
+.button--vote>svg:hover{
+	fill: var(--primaryOne);
+}
+
+
 .button--edit::before {
 	padding-right: 8px;
 	content: url(./images/icon-edit.svg);
@@ -285,10 +295,7 @@ body {
 	border: 1px var(--primaryOne) solid;
 }
 
-.vote-plus:first-child:hover,
-.vote-minus:first-child:hover {
-	color: var(--primaryOne);
-}
+
 
 @media only screen and (max-width: 1440px) {
 	.container {
