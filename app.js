@@ -11,7 +11,8 @@ let dataComments = {}
 onload = async () => {
 	let localData = localStorage.getItem('comments')
 	if (localData) {
-		const data = JSON.parse(localData)
+		let data = JSON.parse(localData)
+		console.log(data)
 		dataComments.comments = data.comments
 		dataComments.currentUser = data.currentUser
 		currentUser = dataComments.currentUser
@@ -58,6 +59,9 @@ const getTemplateComment = (template, data, viewButtons) => {
 const addCommment = () => {
 	let textAreaElement = document.querySelector('.textarea')
 	let contentTextArea = textAreaElement.value
+	let dataFromLocalStorage = localStorage.getItem('comments')
+	let parseLocalStorage = JSON.parse(dataFromLocalStorage)
+	const fromLocalStorage = parseLocalStorage
 	if (contentTextArea) {
 		let contextOwnComment = {
 			id: 1,
@@ -72,6 +76,10 @@ const addCommment = () => {
 				username: dataComments.currentUser.username,
 			},
 		}
+		let commentsFromLocalStorage = fromLocalStorage.comments
+		commentsFromLocalStorage.push(contextOwnComment)
+		console.log(commentsFromLocalStorage)
+		localStorage.setItem('comments', JSON.stringify(commentsFromLocalStorage))
 		getTemplateComment(commentTemplate, contextOwnComment, true)
 		container.appendChild(comment)
 		textAreaElement.value = ''

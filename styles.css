@@ -280,6 +280,11 @@ body {
 	opacity: 0.5;
 }
 
+.textarea:hover,
+.textarea:focus {
+	border: 1px var(--primaryOne) solid;
+}
+
 .vote-plus:first-child:hover,
 .vote-minus:first-child:hover {
 	color: var(--primaryOne);
