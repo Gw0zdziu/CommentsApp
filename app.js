@@ -43,6 +43,7 @@ const getTemplateComment = (template, data, viewButtons) => {
 	template.querySelector('.created-date').textContent = data.createdAt
 	template.querySelector('.sentence-comment').textContent = data.content
 	if (viewButtons) {
+		template.querySelector('.indicator-you').style.display = 'block'
 		template.querySelector('.button--reply').style.display = 'none'
 		template.querySelector('.button--edit').style.display = 'flex'
 		template.querySelector('.button--delete').style.display = 'flex'
@@ -56,12 +57,13 @@ const getTemplateComment = (template, data, viewButtons) => {
 }
 
 const addCommment = () => {
-	let textAreaElement = document.querySelector('.textarea')
-	let contentTextArea = textAreaElement.value	
+	const newCommentContainer = document.querySelector('.add-new-comment')
+	let textAreaElement = newCommentContainer.querySelector('.textarea')
+	let contentTextArea = textAreaElement.value
 	let idLastComment = dataComments.comments.at(-1).id
 	if (contentTextArea) {
 		let contextOwnComment = {
-			id: idLastComment+1,
+			id: idLastComment + 1,
 			content: contentTextArea,
 			createdAt: '1 month ago',
 			score: 0,
@@ -79,7 +81,12 @@ const addCommment = () => {
 		container.appendChild(comment)
 		textAreaElement.value = ''
 	} else {
-		textAreaElement.setAttribute('placeholder', 'Insert content comment')
+		const snackbarInfo = document.querySelector('#snackbar-info')
+		snackbarInfo.textContent = 'Add comment content'
+		snackbarInfo.className = 'show'
+		setTimeout(() => {
+			snackbarInfo.className = snackbarInfo.className.replace('show', '')
+		}, 3000)
 	}
 }
 
@@ -90,11 +97,44 @@ const deleteComment = (event) => {
 	let deleteCommentButtton = modalContainer.querySelector('.modal-confirm-button')
 	deleteCommentButtton.addEventListener('click', () => {
 		elementToDelete.remove()
-		dataComments.comments.splice(idCommentToDelete-1)
+		dataComments.comments.splice(idCommentToDelete - 1)
 		localStorage.setItem('comments', JSON.stringify(dataComments))
 		modalContainer.classList.remove('display-modal')
 	})
 }
 const cancelDeleteComment = () => {
 	modalContainer.classList.remove('display-modal')
+}
+
+const editComment = (e) => {
+	const parentEditButton = e.parentNode.parentNode
+	const contentComment = parentEditButton.querySelector('.sentence-comment')
+	const contentCommentText = contentComment.textContent
+	const textareaEdit = parentEditButton.querySelector('.edit-textarea-comment')
+	const updateButton = parentEditButton.querySelector('.button--update')
+	textareaEdit.value = contentCommentText
+	contentComment.classList.add('hide-element')
+	textareaEdit.classList.remove('hide-element')
+	updateButton.classList.remove('hide-element')
+}
+
+const updateComment = (e) => {
+	const parentEditButton = e.parentNode
+	const textareaEdit = parentEditButton.querySelector('.edit-textarea-comment')
+	const updateButton = parentEditButton.querySelector('.button--update')
+	const contentComment = parentEditButton.querySelector('.sentence-comment')
+	const textareaValue = textareaEdit.value
+	if (textareaValue) {
+		contentComment.textContent = textareaValue
+		contentComment.classList.remove('hide-element')
+		textareaEdit.classList.add('hide-element')
+		updateButton.classList.add('hide-element')
+	} else {
+		const snackbarInfo = document.querySelector('#snackbar-info')
+		snackbarInfo.textContent = 'The edit field must not be empty'
+		snackbarInfo.className = 'show'
+		setTimeout(() => {
+			snackbarInfo.className = snackbarInfo.className.replace('show', '')
+		}, 3000)
+	}
 }

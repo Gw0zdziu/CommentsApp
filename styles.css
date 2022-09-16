@@ -56,7 +56,7 @@ body {
 
 .new-comment {
 	display: grid;
-	grid-template-rows: repeat(2, 1fr);
+	grid-template-rows: fit-content(100%) auto;
 	grid-template-columns: 64px repeat(2, 1fr);
 	align-items: start;
 	min-height: 162px;
@@ -142,6 +142,56 @@ body {
 	background-color: var(--primaryTwo);
 }
 
+#snackbar-info {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	visibility: hidden;
+	position: fixed;
+	top: 16px;
+	min-width: 448px;
+	padding: 12px;
+	border-radius: 8px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	background-color: #ff9800;
+	color: white;
+	fill: white;
+	font-weight: var(--font-medium);
+	z-index: 1;
+}
+
+#snackbar-info::before {
+	content: url(/images/icon-warning.svg);
+	fill: white;
+}
+
+#snackbar-info.show {
+	visibility: visible;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+	from {
+		top: 0px;
+		opacity: 0;
+	}
+	to {
+		top: 16px;
+		opacity: 1;
+	}
+}
+
+@keyframes fadeout {
+	from {
+		top: 16px;
+		opacity: 1;
+	}
+	to {
+		top: 0px;
+		opacity: 0;
+	}
+}
+
 .info-comment {
 	display: flex;
 	align-items: center;
@@ -171,14 +221,24 @@ body {
 	gap: 16px;
 }
 
-.sentence-comment {
+.sentence-comment,
+.edit-textarea-comment {
 	display: grid;
 	grid-column-start: 2;
 	grid-column-end: 4;
 	grid-row-start: 2;
 	grid-row-end: 3;
+	align-self: stretch;
 	word-break: break-all;
 	white-space: normal;
+}
+
+.indicator-you {
+	display: none;
+	border-radius: 4px;
+	padding: 2px 10px;
+	background-color: var(--primaryOne);
+	color: var(--neutralFour);
 }
 
 .image {
@@ -215,7 +275,17 @@ body {
 	font-weight: 600;
 	cursor: pointer;
 }
-.button--send {
+.button--update {
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 3;
+	grid-row-end: 4;
+	justify-self: end;
+	margin-top: 12px;
+}
+
+.button--send,
+.button--update {
 	padding: 12px 24px;
 	background-color: var(--primaryOne);
 	color: var(--neutralFour);
@@ -257,15 +327,13 @@ body {
 	background-color: transparent;
 }
 
-
-.button--vote>svg{
-fill: #C5C6EF;
+.button--vote > svg {
+	fill: #c5c6ef;
 }
 
-.button--vote>svg:hover{
+.button--vote > svg:hover {
 	fill: var(--primaryOne);
 }
-
 
 .button--edit::before {
 	padding-right: 8px;
@@ -295,7 +363,9 @@ fill: #C5C6EF;
 	border: 1px var(--primaryOne) solid;
 }
 
-
+.hide-element {
+	display: none;
+}
 
 @media only screen and (max-width: 1440px) {
 	.container {

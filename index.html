@@ -8,6 +8,9 @@
 		<link rel="stylesheet" href="./styles.css" />
 	</head>
 	<body>
+		<div id="snackbar-info">
+			Add comment content	
+		</div>
 		<div class="modal-container">
 			<div class="modal">
 				<h2 class="modal-header">Delete comment</h2>
@@ -33,15 +36,18 @@
 						</div>
 						<div class="info-comment">
 							<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
-							<span class="user-name">User</span>
-							<span class="created-date">1 day ago</span>
+							<span class="user-name"></span>
+							<div class="indicator-you">you</div>
+							<span class="created-date"></span>
 						</div>
 						<div class="buttons-comment">
-							<button class="button button-comment button--edit">Edit</button>
+							<button class="button button-comment button--edit" onclick="editComment(this)">Edit</button>
 							<button class="button button-comment button--delete" onclick="deleteComment(this)">Delete</button>
 							<button class="button button-comment button--reply">Reply</button>
 						</div>
 						<p class="sentence-comment"></p>
+						<textarea class="textarea edit-textarea-comment hide-element"></textarea>
+						<button class="button button--update hide-element" onclick="updateComment(this)">Update</button>
 					</div>
 				</template>
 				<div class="reply-comments-container">
@@ -64,7 +70,7 @@
 							<button class="button button-comment button--delete">Delete</button>
 							<button class="button button-comment button--reply">Reply</button>
 						</div>
-						<p class="sentence-comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis beatae incidunt alias molestiae omnis quam culpa quasi nam tempore dolorem, enim dicta excepturi voluptatum assumenda. Ad pariatur nisi repellat quae.</p>
+						<p class="sentence-comment"></p>
 					</div>
 				</div>			
 				</template>
