@@ -1,4 +1,5 @@
-const container = document.querySelector('.comments')
+const commentsContainer = document.querySelector('.comments-container')
+const addCommentContainer = document.querySelector('.add-new-comment')
 const commentTemplate = document.querySelector('#new-comment-template').content
 const commentReplyTemplate = document.querySelector('#new-comment-reply-template').content
 const buttonSend = document.querySelector('.button--send')
@@ -10,6 +11,7 @@ let dataComments = {}
 
 onload = async () => {
 	let localData = localStorage.getItem('comments')
+	let currentUser;
 	if (localData) {
 		let data = JSON.parse(localData)
 		dataComments.comments = data.comments
@@ -32,7 +34,7 @@ const createComments = (data) => {
 			getTemplateComment(commentTemplate, item, true)
 		}
 	})
-	container.appendChild(comment)
+	commentsContainer.appendChild(comment)
 }
 
 const getTemplateComment = (template, data, viewButtons) => {
@@ -56,7 +58,7 @@ const getTemplateComment = (template, data, viewButtons) => {
 	comment.appendChild(cloneTemplate)
 }
 
-const addCommment = () => {
+const addComment = () => {
 	const newCommentContainer = document.querySelector('.add-new-comment')
 	let textAreaElement = newCommentContainer.querySelector('.textarea')
 	let contentTextArea = textAreaElement.value
@@ -78,7 +80,7 @@ const addCommment = () => {
 		dataComments.comments.push(contextOwnComment)
 		localStorage.setItem('comments', JSON.stringify(dataComments))
 		getTemplateComment(commentTemplate, contextOwnComment, true)
-		container.appendChild(comment)
+		commentsContainer.appendChild(comment)
 		textAreaElement.value = ''
 	} else {
 		const snackbarInfo = document.querySelector('#snackbar-info')
@@ -94,8 +96,8 @@ const deleteComment = (event) => {
 	modalContainer.classList.add('display-modal')
 	let elementToDelete = event.parentNode.parentNode
 	let idCommentToDelete = elementToDelete.getAttribute('id')
-	let deleteCommentButtton = modalContainer.querySelector('.modal-confirm-button')
-	deleteCommentButtton.addEventListener('click', () => {
+	let deleteCommentButton = modalContainer.querySelector('.modal-confirm-button')
+	deleteCommentButton.addEventListener('click', () => {
 		elementToDelete.remove()
 		dataComments.comments.splice(idCommentToDelete - 1)
 		localStorage.setItem('comments', JSON.stringify(dataComments))
