@@ -32,7 +32,15 @@ body {
 }
 
 .container {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 	width: 40vw;
+}
+.comments-container{
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 }
 
 .comments {
@@ -47,7 +55,6 @@ body {
 	grid-template-columns: 50px auto 80px;
 	grid-template-rows: 1fr;
 	gap: 12px;
-	margin: 0 16px 16px 16px;
 	padding: 20px;
 	border-radius: 8px;
 	background-color: var(--neutralFour);
@@ -74,7 +81,8 @@ body {
 }
 
 .reply {
-	width: 96%;
+	width: 90%;
+	margin-left: 10%;
 }
 
 .modal-container {

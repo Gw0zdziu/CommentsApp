@@ -1,5 +1,5 @@
 const commentsContainer = document.querySelector('.comments-container')
-const addCommentContainer = document.querySelector('.add-new-comment')
+const addCommentContainer = document.querySelector('.add-new-comment-container')
 const commentTemplate = document.querySelector('#new-comment-template').content
 const commentReplyTemplate = document.querySelector('#new-comment-reply-template').content
 const buttonSend = document.querySelector('.button--send')
@@ -28,24 +28,42 @@ onload = async () => {
 
 const createComments = (data) => {
 	data.forEach((item) => {
+
 		if (item.user.username !== dataComments.currentUser.username) {
-			getTemplateComment(commentTemplate, item, false)
+			getTemplateComment(commentTemplate, item, false,false)
 		} else {
-			getTemplateComment(commentTemplate, item, true)
+			getTemplateComment(commentTemplate, item, true, false)
+		}
+		if (item.replies.length > 0){
+			createReplies(item.replies)
 		}
 	})
 	commentsContainer.appendChild(comment)
 }
 
-const getTemplateComment = (template, data, viewButtons) => {
+const createReplies = (replies) =>{
+	const commentContainer = commentTemplate.querySelector('.comment-container')
+	replies.forEach(reply => {
+		if (reply.user.username !== dataComments.currentUser.username) {
+			getTemplateComment(commentReplyTemplate, reply, false, true)
+		} else {
+			getTemplateComment(commentReplyTemplate, reply, true, true)
+		}
+	})
+}
+
+const getTemplateComment = (template, data, viewButtons, reply) => {
 	template.querySelector('.new-comment').setAttribute('id', data.id)
 	template.querySelector('.score').textContent = data.score
 	template.querySelector('.image').src = data.user.image.png
 	template.querySelector('.user-name').textContent = data.user.username
 	template.querySelector('.created-date').textContent = data.createdAt
-	template.querySelector('.sentence-comment').textContent = data.content
+	if (reply){
+		template.querySelector('.sentence-comment').textContent = `@${data.replyingTo} ${data.content}`
+	}else {
+		template.querySelector('.sentence-comment').textContent = data.content
+	}
 	if (viewButtons) {
-		template.querySelector('.indicator-you').style.display = 'block'
 		template.querySelector('.button--reply').style.display = 'none'
 		template.querySelector('.button--edit').style.display = 'flex'
 		template.querySelector('.button--delete').style.display = 'flex'
@@ -57,6 +75,8 @@ const getTemplateComment = (template, data, viewButtons) => {
 	let cloneTemplate = template.cloneNode(true)
 	comment.appendChild(cloneTemplate)
 }
+
+
 
 const addComment = () => {
 	const newCommentContainer = document.querySelector('.add-new-comment')
@@ -92,9 +112,9 @@ const addComment = () => {
 	}
 }
 
-const deleteComment = (event) => {
+const deleteComment = (e) => {
 	modalContainer.classList.add('display-modal')
-	let elementToDelete = event.parentNode.parentNode
+	let elementToDelete = e.parentNode.parentNode
 	let idCommentToDelete = elementToDelete.getAttribute('id')
 	let deleteCommentButton = modalContainer.querySelector('.modal-confirm-button')
 	deleteCommentButton.addEventListener('click', () => {
@@ -140,3 +160,4 @@ const updateComment = (e) => {
 		}, 3000)
 	}
 }
+

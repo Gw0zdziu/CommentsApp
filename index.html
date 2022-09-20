@@ -19,17 +19,16 @@
 					and can't be undone.</p>
 				<button class=" button modal-cancel-button" onclick="cancelDeleteComment()">NO,CANCEL</button>
 				<button class="button modal-confirm-button">YES,DELETE</button>
-			</div>
+			</div>comment-container
 		</div>
 		<div class="container">
 			<div class="comments-container">
-				<template id="new-comment-template">
+					<template id="new-comment-template">
 					<div class="comment-container">
 						<div class="new-comment">
 							<div class="vote-comment">
 								<button class="button--vote vote-plus">
 									<svg  width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z" /></svg></button>
-								</button>
 								<div class="score">5</div>
 								<button class="button--vote vote-minus">
 									<svg width="11" height="3" xmlns="http://www.w3.org/2000/svg"><path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z" ></svg>
@@ -51,38 +50,38 @@
 							<button class="button button--update hide-element" onclick="updateComment(this)">Update</button>
 						</div>
 					</div>
-				</template>
-				<div class="reply-comments-container">
-					<template id="new-comment-reply-template">
-					<div class="new-comment reply">
-						<div class="vote-comment">
-							<button class="button--vote vote-plus">
-							</button>
-							<div class="score">5</div>
-							<button class="button--vote vote-minus">						
-							</button>
+					</template>
+						<div class="reply-comments-container">
+							<template id="new-comment-reply-template">
+								<div class="new-comment reply">
+									<div class="vote-comment">
+										<button class="button--vote vote-plus">
+										</button>
+										<div class="score">5</div>
+										<button class="button--vote vote-minus">
+										</button>
+									</div>
+									<div class="info-comment">
+										<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
+										<span class="user-name">User</span>
+										<span class="created-date">1 day ago</span>
+									</div>
+									<div class="buttons-comment">
+										<button class="button button-comment button--edit">Edit</button>
+										<button class="button button-comment button--delete">Delete</button>
+										<button class="button button-comment button--reply">Reply</button>
+									</div>
+									<p class="sentence-comment"></p>
+								</div>
 						</div>
-						<div class="info-comment">
-							<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
-							<span class="user-name">User</span>
-							<span class="created-date">1 day ago</span>
-						</div>
-						<div class="buttons-comment">
-							<button class="button button-comment button--edit">Edit</button>
-							<button class="button button-comment button--delete">Delete</button>
-							<button class="button button-comment button--reply">Reply</button>
-						</div>
-						<p class="sentence-comment"></p>
-					</div>
-				</div>			
-				</template>
+					</template>
+				</div>
 			</div>
-		</div>
-		<div class="add-new-comment">
-			<img class="image image-current-user" src="./images/avatars/image-juliusomo.png" alt="image-juliusomo.png" />
-			<textarea class="textarea" placeholder="Add a comment..."></textarea>
-			<button class="button button--send" onclick="addComment()">Send</button>
-		</div>		
+			<div class="add-new-comment">
+				<img class="image image-current-user" src="./images/avatars/image-juliusomo.png" alt="image-juliusomo.png" />
+				<textarea class="textarea" placeholder="Add a comment..."></textarea>
+				<button class="button button--send button-reply-on-comment" onclick="addComment()">Send</button>
+			</div>
 		<script src="./app.js"></script>
 	</body>
 </html>
