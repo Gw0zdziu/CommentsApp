@@ -2,7 +2,6 @@ const commentsContainer = document.querySelector('.comments-container')
 const addCommentContainer = document.querySelector('.add-new-comment')
 const commentTemplate = document.querySelector('#new-comment-template').content
 const commentReplyTemplate = document.querySelector('#new-comment-reply-template').content
-const buttonSend = document.querySelector('.button--send')
 const modalContainer = document.querySelector('.modal-container')
 
 const comment = document.createDocumentFragment()
@@ -11,12 +10,10 @@ let dataComments = {}
 
 onload = async () => {
 	let localData = localStorage.getItem('comments')
-	let currentUser;
 	if (localData) {
 		let data = JSON.parse(localData)
 		dataComments.comments = data.comments
 		dataComments.currentUser = data.currentUser
-		currentUser = dataComments.currentUser
 		createComments(dataComments.comments)
 	} else {
 		const response = await fetch('./data.json')
@@ -28,22 +25,23 @@ onload = async () => {
 
 const createComments = (data) => {
 	data.forEach((item) => {
-
+		const {replies} = item
 		if (item.user.username !== dataComments.currentUser.username) {
 			getTemplateComment(commentTemplate, item, false,false)
+			if (replies.length > 0){
+				const {replies} = item;
+				createReplies(replies)
+			}
 		} else {
 			getTemplateComment(commentTemplate, item, true, false)
 		}
-		if (item.replies.length > 0){
-			createReplies(item.replies)
-		}
+
 	})
 	commentsContainer.appendChild(comment)
 }
 
-const createReplies = (replies) =>{
-	const commentContainer = commentTemplate.querySelector('.comment-container')
-	replies.forEach(reply => {
+const createReplies =  (replies) =>{
+	 replies.forEach(reply => {
 		if (reply.user.username !== dataComments.currentUser.username) {
 			getTemplateComment(commentReplyTemplate, reply, false, true)
 		} else {
@@ -54,7 +52,6 @@ const createReplies = (replies) =>{
 
 const getTemplateComment = (template, data, viewButtons, reply) => {
 	template.querySelector('.new-comment').setAttribute('id', data.id)
-	template.querySelector('.score').textContent = data.score
 	template.querySelector('.image').src = data.user.image.png
 	template.querySelector('.user-name').textContent = data.user.username
 	template.querySelector('.created-date').textContent = data.createdAt
@@ -163,13 +160,38 @@ const updateComment = (e) => {
 
 const replyComment = (e) =>{
 	const parentReplyButton = e.parentNode.parentNode
+	const idMainComment = parentReplyButton.getAttribute('id')
 	const replyClone = addCommentContainer.cloneNode(true)
+	replyClone.classList.add('reply')
 	const replyButton = replyClone.querySelector('.button--send')
+	const textArea = replyClone.querySelector('.textarea')
+	const userReplied = parentReplyButton.querySelector('.user-name').textContent
 	replyButton.textContent = 'Reply'
+	replyButton.removeAttribute('onclick')
 	parentReplyButton.after(replyClone)
-	const valueTextArea = replyClone.value
 	replyButton.addEventListener('click', ()=>{
-
+		const text = textArea.value
+		let idLastComment = dataComments.comments.at(-1).id
+		let contextOwnComment = {
+			id: idLastComment + 1,
+			content: text,
+			createdAt: '1 month ago',
+			score: 0,
+			replyingTo: userReplied,
+			user: {
+				image: {
+					png: dataComments.currentUser.image.png,
+					webp: dataComments.currentUser.image.webp,
+				},
+				username: dataComments.currentUser.username,
+			},
+		}
+		dataComments.comments[idMainComment-1].replies.push(contextOwnComment)
+		localStorage.setItem('comments', JSON.stringify(dataComments))
+		getTemplateComment(commentReplyTemplate, contextOwnComment,true,true)
+		parentReplyButton.after(comment)
+		replyClone.classList.add('hide-element')
 	})
 }
+
 

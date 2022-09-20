@@ -46,7 +46,6 @@ body {
 .comments {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
 	margin: 16px;
 }
 
@@ -55,22 +54,24 @@ body {
 	grid-template-columns: 50px auto 80px;
 	grid-template-rows: 1fr;
 	gap: 12px;
+	margin: 16px 0;
 	padding: 20px;
 	border-radius: 8px;
 	background-color: var(--neutralFour);
-	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
 }
 
 .new-comment {
 	display: grid;
 	grid-template-rows: fit-content(100%) auto;
-	grid-template-columns: 64px repeat(2, 1fr);
+	grid-template-columns:repeat(2, 1fr);
 	align-items: start;
 	min-height: 162px;
+	margin-bottom: 16px;
 	padding: 16px;
 	border-radius: 8px;
 	background-color: var(--neutralFour);
-	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
 }
 
 .reply-comments-container {
@@ -160,7 +161,7 @@ body {
 	min-width: 448px;
 	padding: 12px;
 	border-radius: 8px;
-	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
 	background-color: #ff9800;
 	color: white;
 	fill: white;
@@ -180,7 +181,7 @@ body {
 
 @keyframes fadein {
 	from {
-		top: 0px;
+		top: 0;
 		opacity: 0;
 	}
 	to {
@@ -195,7 +196,7 @@ body {
 		opacity: 1;
 	}
 	to {
-		top: 0px;
+		top: 0;
 		opacity: 0;
 	}
 }
@@ -232,10 +233,12 @@ body {
 .sentence-comment,
 .edit-textarea-comment {
 	display: grid;
-	grid-column-start: 2;
+	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 2;
 	grid-row-end: 3;
+	margin-top: 12px;
+	font-weight: var(--font-medium);
 	align-self: stretch;
 	word-break: break-all;
 	white-space: normal;
@@ -261,7 +264,7 @@ body {
 	outline-style: none;
 	resize: none;
 	border-radius: 8px;
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.06) 0 1px 2px 0;
 	font-size: 16px;
 }
 
