@@ -1,5 +1,5 @@
 const commentsContainer = document.querySelector('.comments-container')
-const addCommentContainer = document.querySelector('.add-new-comment-container')
+const addCommentContainer = document.querySelector('.add-new-comment')
 const commentTemplate = document.querySelector('#new-comment-template').content
 const commentReplyTemplate = document.querySelector('#new-comment-reply-template').content
 const buttonSend = document.querySelector('.button--send')
@@ -159,5 +159,17 @@ const updateComment = (e) => {
 			snackbarInfo.className = snackbarInfo.className.replace('show', '')
 		}, 3000)
 	}
+}
+
+const replyComment = (e) =>{
+	const parentReplyButton = e.parentNode.parentNode
+	const replyClone = addCommentContainer.cloneNode(true)
+	const replyButton = replyClone.querySelector('.button--send')
+	replyButton.textContent = 'Reply'
+	parentReplyButton.after(replyClone)
+	const valueTextArea = replyClone.value
+	replyButton.addEventListener('click', ()=>{
+
+	})
 }
 
