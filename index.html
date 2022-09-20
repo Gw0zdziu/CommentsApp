@@ -1,26 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Interactive comments section</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
-
-  <!-- Pull dynamic content from the data.json file -->
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+		<title>Frontend Mentor | Interactive comments section</title>
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<div id="snackbar-info">
+			Add comment content	
+		</div>
+		<div class="modal-container">
+			<div class="modal">
+				<h2 class="modal-header">Delete comment</h2>
+				<p class="modal-content">Are you sure you want to delete this
+					comment? This will remove the comment
+					and can't be undone.</p>
+				<button class=" button modal-cancel-button" onclick="cancelDeleteComment()">NO,CANCEL</button>
+				<button class="button modal-confirm-button">YES,DELETE</button>
+			</div>comment-container
+		</div>
+		<div class="container">
+			<div class="comments-container">
+					<template id="new-comment-template">
+					<div class="comment-container">
+						<div class="new-comment">
+							<div class="info-comment">
+								<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
+								<span class="user-name"></span>
+								<div class="indicator-you">you</div>
+								<span class="created-date"></span>
+							</div>
+							<div class="buttons-comment">
+								<button class="button button-comment button--edit" onclick="editComment(this)">Edit</button>
+								<button class="button button-comment button--delete" onclick="deleteComment(this)">Delete</button>
+								<button class="button button-comment button--reply" onclick="replyComment(this)">Reply</button>
+							</div>
+							<p class="sentence-comment"></p>
+							<textarea class="textarea edit-textarea-comment hide-element"></textarea>
+							<button class="button button--update hide-element" onclick="updateComment(this)">Update</button>
+						</div>
+					</div>
+					</template>
+						<div class="reply-comments-container">
+							<template id="new-comment-reply-template">
+								<div class="new-comment reply">
+									<div class="info-comment">
+										<img class="image" src="./images/avatars/image-juliusomo.png" alt="" />
+										<span class="user-name">User</span>
+										<span class="created-date">1 day ago</span>
+									</div>
+									<div class="buttons-comment">
+										<button class="button button-comment button--edit" onclick="editComment(this)">Edit</button>
+										<button class="button button-comment button--delete" onclick="deleteComment(this)">Delete</button>
+										<button class="button button-comment button--reply" onclick="replyComment(this)">Reply</button>
+									</div>
+									<p class="sentence-comment"></p>
+									<textarea class="textarea edit-textarea-comment hide-element"></textarea>
+									<button class="button button--update hide-element" onclick="updateComment(this)">Update</button>
+								</div>
+						</div>
+					</template>
+				</div>
+			</div>
+			<div class="add-new-comment">
+				<img class="image image-current-user" src="./images/avatars/image-juliusomo.png" alt="image-juliusomo.png" />
+				<textarea class="textarea" placeholder="Add a comment..."></textarea>
+				<button class="button button--send button-reply-on-comment" onclick="addComment()">Send</button>
+			</div>
+		<script src="./app.js"></script>
+	</body>
 </html>
